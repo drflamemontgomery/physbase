@@ -1,0 +1,11 @@
+{
+    "name" : "physbase",
+    "url" : "https://github.com/drflamemontgomery/physbase/"
+    "license": "MIT",
+    "tags": ["physics", "template"]
+    "description" : "Physics Base for Games",
+    "version" : "1.0.0",
+    "classPath": "src/",
+    "releasenote": "Initial release",
+    "contributors": ["drflamemontgomery"],
+}
