@@ -1,12 +1,18 @@
 package physbase.maths;
 
 
-typedef Vec2 = {
+typedef Vec2 = {    
     var x:Float;
     var y:Float;
 };
 
-
-inline function BoolInt(b:Bool):Int {
-    return b ? 1 : 0;
+abstract Bint(Int) from Int to Int {
+    
+    public function new(i:Int) {
+	this = i;
+    }
+    @:from
+    public static function fromBool(b:Bool):Bint {
+	return new Bint(b ? 1 : 0);
+    }
 }

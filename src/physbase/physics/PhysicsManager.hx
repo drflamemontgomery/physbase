@@ -1,24 +1,25 @@
 package physbase.physics;
 
-import maths.Types;
+import physbase.maths.Types;
 
 class PhysicsManager {
 
     public static var gravity:Vec2;
-    private var bodies:Array<Body>;
+    private final bodies:Array<Body>;
 
     public static var cell_size:Int;
+    public static var half_pixel:Float;
     
     public function new(g:Vec2, cs:Int) {
-
         gravity = g;
         cell_size = cs;
+	half_pixel = 0.5/cs;
 	
 	bodies = new Array<Body>();
     }
 
     public function update(steps:Int, dt:Float) {
-	var timeStep = dt/steps;
+	final timeStep = dt/steps;
 
 	for(step in 0...steps) {
 	    for(body in bodies) {
@@ -32,12 +33,16 @@ class PhysicsManager {
 
 	    for(body in bodies) {
 		body.fixNewCollisions();
+		body.fixPosition();
 	    }
 	}
     }
 
-    public function createBody():Body {
-	var body = new Body();
+    public function createBody(?constructor:Void->Body):Body {
+	if(constructor == null) {
+	    constructor = Body.new;
+	}
+        final body:Body = constructor();
 	bodies.push(body);
 	return body;
     }
